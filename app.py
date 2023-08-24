@@ -37,7 +37,7 @@ def get_conversation_chain(vectorstore):
 
 def handle_user_question(user_question):
     response=st.session_state.conversation({'question':user_question})
-    st.session_state.chat_history=response
+    st.session_state.chat_history=response['chat_history']
     
     for i, message in enumerate(st.session_state.chat_history):
         if i%2==0:
@@ -65,7 +65,7 @@ def main():
         st.session_state.conversation=None
     
     st.header("Chat with muliple pdfs :books:")
-    user_question=st.text_input("Ask any question about your pdfs")
+    user_question=st.text_input("Ask any question about your pdfs:")
     
     if user_question:
         handle_user_question(user_question)
@@ -88,7 +88,7 @@ def main():
                 
                 # create conversation chain
                 st.session_state.conversation=get_conversation_chain(vectorstore)
-    st.session_state.conversation
+    
          
      
 
